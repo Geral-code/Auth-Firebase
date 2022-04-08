@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-4 offset-4">
-        <form @submit.prevent="">
+        <form @submit.prevent="loginUsuario({email: email, password: password})">
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label"
               >Ingrese su correo</label
@@ -25,20 +25,18 @@
               id="exampleInputPassword1"
               v-model="password"
             />
-          </div>
-
-          
-          <button type="submit" class="btn btn-primary" >Acceder</button>
-        </form>
-      
-
-
+          </div>         
+          <button type="submit" class="btn btn-primary">Acceder</button>
+        </form>   
+        <p> {{error}} </p>
            </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
+
 export default {
     name: 'Login',
     data() {
@@ -46,6 +44,12 @@ export default {
             email:"",
             password: "",
         }
+    },
+    methods: {
+      ...mapActions(['loginUsuario'])
+    },
+    computed: {
+      ...mapState(['error'])
     }
 
 }
